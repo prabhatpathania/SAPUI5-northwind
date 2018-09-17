@@ -1,0 +1,28 @@
+<mvc:View controllerName="nw.prod.nw.prod.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}"/>
+		</semantic:titleHeading>
+		<semantic:content>
+			<List
+				items="{path : '/Suppliers', filters : [{ path : 'Name', operator : 'EQ', value1 : 'Tokyo Traders' }] }">
+				<CustomListItem >
+					<Text text="Suppliers- {Name}"/>
+					<List items="{path: 'Products', parameters:{expand: 'Category'} }" >
+						<ObjectListItem title="Product Name- {Name}" intro="Product Description- {Category/Name}"/>
+					</List>
+				</CustomListItem>
+			</List>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{worklistView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+	</semantic:SemanticPage>
+</mvc:View>
